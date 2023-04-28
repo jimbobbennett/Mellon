@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mellon", "Mellon\Mellon.csproj", "{4ACA6FD5-42E9-47D1-8BBC-ABD38B4E0825}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mellon.Test", "Mellon.Test\Mellon.Test.csproj", "{819C33AE-2374-4D3A-927B-8442C413F54C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mellon.TestHarness", "Mellon.TestHarness\Mellon.TestHarness.csproj", "{273BA35E-D223-481D-A04A-9C4E352851A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4ACA6FD5-42E9-47D1-8BBC-ABD38B4E0825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ACA6FD5-42E9-47D1-8BBC-ABD38B4E0825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ACA6FD5-42E9-47D1-8BBC-ABD38B4E0825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ACA6FD5-42E9-47D1-8BBC-ABD38B4E0825}.Release|Any CPU.Build.0 = Release|Any CPU
+		{819C33AE-2374-4D3A-927B-8442C413F54C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{819C33AE-2374-4D3A-927B-8442C413F54C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{819C33AE-2374-4D3A-927B-8442C413F54C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{819C33AE-2374-4D3A-927B-8442C413F54C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{273BA35E-D223-481D-A04A-9C4E352851A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{273BA35E-D223-481D-A04A-9C4E352851A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{273BA35E-D223-481D-A04A-9C4E352851A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{273BA35E-D223-481D-A04A-9C4E352851A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
