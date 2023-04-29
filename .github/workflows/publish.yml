@@ -18,6 +18,10 @@ jobs:
         dotnet-version: '7.0.x'
     - name: Install dependencies
       run: dotnet restore
+    - name: Set the version
+      run:
+        dotnet tool install --global GitVersion.Tool --version 5.*
+        dotnet-gitversion
     - name: Build
       run: dotnet build
     - name: Set integration test user secrets
