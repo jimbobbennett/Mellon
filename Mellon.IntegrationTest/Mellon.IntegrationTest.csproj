@@ -8,7 +8,7 @@
     <UserSecretsId>97553a26-8def-4e27-9019-7896cfc50a9d</UserSecretsId>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <FileVersion>0.1.0.0</FileVersion>
-    <InformationalVersion>0.1.0+19.Branch.main.Sha.b931e9938ad63c543f1b006471ba8f011375e8be</InformationalVersion>
+    <InformationalVersion>0.1.0+21.Branch.main.Sha.0039abcc568455a77cb157c0e1d99a351c14efe1</InformationalVersion>
     <Version>0.1.0</Version>
   </PropertyGroup>
   <ItemGroup>
