@@ -33,7 +33,7 @@ jobs:
         dotnet tool install --global GitVersion.Tool --version 5.*
         dotnet-gitversion /updateprojectfiles
     - name: Build
-      run: dotnet build
+      run: dotnet build -c release
     - name: Set integration test user secrets
       run: dotnet user-secrets set --project Mellon.IntegrationTest "TheOneApi:apiKey" "${{ secrets.ONE_API_KEY }}"
     - name: Test with the dotnet CLI
@@ -49,3 +49,5 @@ jobs:
       with:
         branch: main
         github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Publish package to NuGet
+      run: dotnet nuget push ./Mellon/bin/Release/JimBobBennett.Mellon.*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}

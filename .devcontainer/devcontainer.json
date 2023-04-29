@@ -11,7 +11,8 @@
 				"docsmsft.docs-authoring-pack",
 				"streetsidesoftware.code-spell-checker",
 				"formulahendry.dotnet-test-explorer",
-				"GitHub.copilot"
+				"GitHub.copilot",
+				"redhat.vscode-xml"
 			]
 		}
 	}

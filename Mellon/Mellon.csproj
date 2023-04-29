@@ -14,6 +14,18 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="Mellon.Test" />
+    <None Include="..\readme.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
+
+  <PropertyGroup>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/jimbobbennett/JimBennett-SDK</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jimbobbennett/JimBennett-SDK</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Copyright>2023 Jim Bennett</Copyright>
+    <PackageTags>sdk,theoneapi</PackageTags>
+    <Description>An SDK for accessing The One Api (https://the-one-api.dev)</Description>
+  </PropertyGroup>
 
 </Project>
