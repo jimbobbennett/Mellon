@@ -67,8 +67,9 @@ internal class TheOneApiEnumerator<T> : IAsyncEnumerator<T>
 
     /// <summary>
     /// The HTTP client to use for requests.
+    /// This has an internal setter for Unit testing purposes.
     /// </summary>
-    private readonly HttpClient _client = new();
+    internal HttpClient Client { get; set; } = new HttpClient();
 
     /// <summary>
     /// The cancellation token to use for requests.
@@ -99,7 +100,7 @@ internal class TheOneApiEnumerator<T> : IAsyncEnumerator<T>
         _apiUri = new Uri(_baseUri, route);
 
         // Set up bearer auth using the API key on the HTTP client.
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+        Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
     }
 
     /// <summary>
@@ -124,7 +125,7 @@ internal class TheOneApiEnumerator<T> : IAsyncEnumerator<T>
     /// </summary>
     public ValueTask DisposeAsync()
     {
-        _client.Dispose();
+        Client.Dispose();
         return ValueTask.CompletedTask;
     }
 
@@ -147,10 +148,10 @@ internal class TheOneApiEnumerator<T> : IAsyncEnumerator<T>
     private async Task<TheOneApiResponse<T>> MakeRequest(Uri api)
     {
         // Create the request
-        var request = new HttpRequestMessage(HttpMethod.Get, api);        
+        var request = new HttpRequestMessage(HttpMethod.Get, api); 
 
         // Send the request
-        var response = await _client.SendAsync(request, _cancellationToken);
+        var response = await Client.SendAsync(request, _cancellationToken);
 
         // Check the request worked
         if (!response.IsSuccessStatusCode)
