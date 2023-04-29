@@ -119,4 +119,4 @@ Want to add the rest of the APIs? That would be awesome.
 
 - Start by [raising an issue](https://github.com/jimbobbennett/JimBennett-SDK/issues) so we can track the work.
 - Fork the repo and make your change
-- Raise a PR. THis repo is configured to run all the unit and integration tests before allowing a PR through, so make sure your tests work!
+- Raise a PR. This repo is configured to run all the unit and integration tests before allowing a PR through, so make sure your tests work!
