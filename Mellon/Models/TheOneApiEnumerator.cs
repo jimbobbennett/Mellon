@@ -121,11 +121,10 @@ internal class TheOneApiEnumerator<T> : IAsyncEnumerator<T>
     }
 
     /// <summary>
-    /// Disposes the HTTP client when this class is disposed
+    /// Disposes class - does nothing but is needed for the interface
     /// </summary>
     public ValueTask DisposeAsync()
     {
-        Client.Dispose();
         return ValueTask.CompletedTask;
     }
 

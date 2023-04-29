@@ -1,7 +1,5 @@
 using System.Net;
 using FluentAssertions;
-using Moq;
-using Moq.Protected;
 
 using Mellon.Models;
 
@@ -119,53 +117,11 @@ public class MoviesTest
             ""page"": 1,
             ""pages"": 1
             }";
-
-
-    private void AddResponseForRequest(Mock<HttpMessageHandler> msgHandler, string expectedRequest, HttpStatusCode statusCode, string content)
-    {
-        var mockedProtected = msgHandler.Protected();
-        var setupApiRequest = mockedProtected.Setup<Task<HttpResponseMessage>>(
-            "SendAsync",
-            ItExpr.Is<HttpRequestMessage>(m => m.RequestUri!.ToString() == expectedRequest),
-            ItExpr.IsAny<CancellationToken>()
-            );
-        setupApiRequest.ReturnsAsync(new HttpResponseMessage()
-        {
-            StatusCode = statusCode,
-            Content = new StringContent(content)
-        });
-    }
-
-    private class ExpectedRequest
-    {
-        public string Request { get; set; }
-        public HttpStatusCode StatusCode { get; set; }
-        public string Content { get; set; }
-
-        public ExpectedRequest(string request, HttpStatusCode statusCode, string content)
-        {
-            Request = request;
-            StatusCode = statusCode;
-            Content = content;
-        }
-    }
-
-    private void CreateMockClient<T>(IAsyncEnumerator<T> enumerator, IEnumerable<ExpectedRequest> requests)
-        where T : TheOneApiModelBase
-    {
-        var msgHandler = new Mock<HttpMessageHandler>();
-
-        foreach (var request in requests)
-        {
-            AddResponseForRequest(msgHandler, request.Request, request.StatusCode, request.Content);
-        }
-
-        var client = new HttpClient(msgHandler.Object);
-
-        var apiEnumerator = (TheOneApiEnumerator<T>)enumerator;
-        client.DefaultRequestHeaders.Authorization = apiEnumerator.Client.DefaultRequestHeaders.Authorization;
-        apiEnumerator.Client = client;
-    }
+        
+    private const string _jsonForFail = @"{
+        ""success"": false,
+        ""message"": ""Something went wrong.""
+        }";
 
     [TestMethod]
     public void GivenAnApiKey_WhenTheMoviesObjectIsCreated_TheApiKeyIsSetOnTheHttpClient()
@@ -182,7 +138,10 @@ public class MoviesTest
     {
         var movies = new Movies("apiKey", 2);
 
-        CreateMockClient(movies.GetAsyncEnumerator(), new[] { new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=1&limit=2", HttpStatusCode.OK, _jsonFor2MoviesAndOnePage) });
+        HttpMessageHandlerMocker.CreateMockClient(movies.GetAsyncEnumerator(), new[] 
+            { 
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=1&limit=2", HttpStatusCode.OK, _jsonFor2MoviesAndOnePage) 
+            });
 
         var count = await movies.CountAsync();
 
@@ -194,9 +153,10 @@ public class MoviesTest
     {
         var movies = new Movies("apiKey", 2);
 
-        CreateMockClient(movies.GetAsyncEnumerator(), new[]{
-            new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4MoviesAndTwoPages),
-            new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4MoviesAndTwoPages)
+        HttpMessageHandlerMocker.CreateMockClient(movies.GetAsyncEnumerator(), new[]
+            {
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4MoviesAndTwoPages),
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4MoviesAndTwoPages)
             });
 
         var count = await movies.CountAsync();
@@ -209,9 +169,10 @@ public class MoviesTest
     {
         var movies = new Movies("apiKey", 2);
 
-        CreateMockClient(movies.GetAsyncEnumerator(), new[]{
-            new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4MoviesAndTwoPages),
-            new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4MoviesAndTwoPages)
+        HttpMessageHandlerMocker.CreateMockClient(movies.GetAsyncEnumerator(), new[]
+            {
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4MoviesAndTwoPages),
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4MoviesAndTwoPages)
             });
 
         var allMovies = new List<Movie>();
@@ -233,9 +194,10 @@ public class MoviesTest
     {
         var movies = new Movies("apiKey", 2);
 
-        CreateMockClient(movies.GetAsyncEnumerator(), new[]{
-            new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4MoviesAndTwoPages),
-            new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4MoviesAndTwoPages)
+        HttpMessageHandlerMocker.CreateMockClient(movies.GetAsyncEnumerator(), new[]
+            {
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4MoviesAndTwoPages),
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4MoviesAndTwoPages)
             });
 
         var allMovies = new List<Movie>();
@@ -270,9 +232,10 @@ public class MoviesTest
     {
         var movies = new Movies("apiKey", 2);
 
-        CreateMockClient(movies.GetAsyncEnumerator(), new[]{
-            new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4MoviesAndTwoPages),
-            new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4MoviesAndTwoPages)
+        HttpMessageHandlerMocker.CreateMockClient(movies.GetAsyncEnumerator(), new[]
+            {
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4MoviesAndTwoPages),
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4MoviesAndTwoPages)
             });
 
         await foreach (var movie in movies) {}
@@ -284,12 +247,44 @@ public class MoviesTest
     }
 
     [TestMethod]
+    public async Task GivenAJsonResponseWithMovies_WhenGettingAMovieWithAMissingIdAfterEnumerating_ThenNullIsReturned()
+    {
+        var movies = new Movies("apiKey", 2);
+
+        HttpMessageHandlerMocker.CreateMockClient(movies.GetAsyncEnumerator(), new[]
+            {
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4MoviesAndTwoPages),
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4MoviesAndTwoPages),
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/foo", HttpStatusCode.InternalServerError, _jsonForFail)
+            });
+
+        await foreach (var movie in movies) {}
+
+        var movieById = await movies.GetAsync("foo");
+
+        movieById.Should().BeNull();
+    }
+
+    [TestMethod]
+    public async Task GivenAJsonResponseWithMovies_WhenGettingAMovieWithAMissingIdBeforeEnumerating_ThenNullIsReturned()
+    {
+        var movies = new Movies("apiKey", 2);
+
+        HttpMessageHandlerMocker.CreateMockClientForAllRequests(movies.GetAsyncEnumerator(), HttpStatusCode.InternalServerError, _jsonForFail);
+
+        var movieById = await movies.GetAsync("foo");
+
+        movieById.Should().BeNull();
+    }
+
+    [TestMethod]
     public async Task GivenAJsonResponseWith4MoviesAndTwoPages_WhenGettingAMovieWithAnExistingIdWithoutEnumerating_ThenTheSingleMovieIsRequestedAndReturned()
     {
         var movies = new Movies("apiKey", 2);
 
-        CreateMockClient(movies.GetAsyncEnumerator(), new[]{
-            new ExpectedRequest("https://the-one-api.dev/v2/movie/5cd95395de30eff6ebccde59", HttpStatusCode.OK, _jsonForSingleMovie),
+        HttpMessageHandlerMocker.CreateMockClient(movies.GetAsyncEnumerator(), new[]
+            {
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/5cd95395de30eff6ebccde59", HttpStatusCode.OK, _jsonForSingleMovie),
             });
 
         var movieById = await movies.GetAsync("5cd95395de30eff6ebccde59");
