@@ -12,6 +12,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - run: |
+        git fetch --prune --unshallow
     - name: Setup dotnet
       uses: actions/setup-dotnet@v3
       with:
@@ -19,9 +21,9 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Install git version
-      run: dotnet tool install --global GitVersion.Tool --version 5.*
-    - name: Set the version
-      run: dotnet-gitversion /updateprojectfiles
+      run: |
+        dotnet tool install --global GitVersion.Tool --version 5.*
+        dotnet-gitversion /updateprojectfiles
     - name: Build
       run: dotnet build
     - name: Set integration test user secrets
