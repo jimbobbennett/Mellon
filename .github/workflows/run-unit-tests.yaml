@@ -18,4 +18,6 @@ jobs:
     - name: Build
       run: dotnet build
     - name: Test with the dotnet CLI
+      env:
+        TheOneApi:apiKey: ${{ secrets.ONE_API_KEY }}
       run: dotnet test
