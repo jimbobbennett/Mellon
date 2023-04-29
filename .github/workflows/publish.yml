@@ -18,13 +18,24 @@ jobs:
         dotnet-version: '7.0.x'
     - name: Install dependencies
       run: dotnet restore
+    - name: Install git version
+      run: dotnet tool install --global GitVersion.Tool --version 5.*
     - name: Set the version
-      run:
-        dotnet tool install --global GitVersion.Tool --version 5.*
-        dotnet-gitversion
+      run: dotnet-gitversion /updateprojectfiles
     - name: Build
       run: dotnet build
     - name: Set integration test user secrets
       run: dotnet user-secrets set --project Mellon.IntegrationTest "TheOneApi:apiKey" "${{ secrets.ONE_API_KEY }}"
     - name: Test with the dotnet CLI
       run: dotnet test
+    - name: Update project files in repo
+      run: |
+        git config --local user.email "jim.bennett@microsoft.com"
+        git config --local user.name "JimBobBennett"
+        git add ./**/*/csproj
+        git commit -m "[skip actions] Update versions"
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        branch: main
+        github_token: ${{ secrets.GITHUB_TOKEN }}
