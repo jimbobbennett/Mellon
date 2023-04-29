@@ -2,7 +2,7 @@
 
 Speak, friend, and enter! A C# SDK for [The One API](https://the-one-api.dev), an API that serves your needs regarding data about The Lord of the Rings, the epic books by J. R. R. Tolkien and the official movie adaptions by Peter Jackson.
 
-![A meme of Bilbo Baggins running with the caption hobbit fans accessing the lord of the rings API](./img/access-api-meme.png)
+![A meme of Bilbo Baggins running with the caption hobbit fans accessing the lord of the rings API](https://raw.githubusercontent.com/jimbobbennett/JimBennett-SDK/main/img/access-api-meme.png)
 
 > This SDK only implements movies and quotes so far.
 
@@ -16,7 +16,7 @@ dotnet add package JimBobBennett.Mellon
 
 ## Get an API key
 
-![A meme of Boromir with the caption one does not simply access the API without an API key](./img/api-key-meme.png)
+![A meme of Boromir with the caption one does not simply access the API without an API key](https://raw.githubusercontent.com/jimbobbennett/JimBennett-SDK/main/img/api-key-meme.png)
 
 Before you can use the SDK, you need an API key for [The One API](https://the-one-api.dev). Sign up at [the-one-api.dev/sign-up](https://the-one-api.dev/sign-up) to get your key.
 
@@ -28,7 +28,7 @@ The entry point to the SDK is the `TheOneAPIClient` class. To create this, you n
 var client = new TheOneAPIClient(new TheOneAPICredentials(<apiKey>));
 ```
 
-![A meme of Frodo Baggins with the caption all right then, keep your user secrets](./img/keep-secrets-meme.png)
+![A meme of Frodo Baggins with the caption all right then, keep your user secrets](https://raw.githubusercontent.com/jimbobbennett/JimBennett-SDK/main/img/keep-secrets-meme.png)
 
 The API key should be set using [dotnet user secrets](https://learn.microsoft.com/aspnet/core/security/app-secrets) or another mechanism to pass them at run time, and not hard coded.
 
@@ -76,7 +76,7 @@ var count = await Movies.CountAsync();
 var fellowshipOfTheRings = await Movies.GetAsync("5cd95395de30eff6ebccde5c");
 ```
 
-![A meme of Bilbo Baggins looking at the One ring with the caption after all why shouldn't I use system.linq.async](./img/system-liq-meme.png)
+![A meme of Bilbo Baggins looking at the One ring with the caption after all why shouldn't I use system.linq.async](https://raw.githubusercontent.com/jimbobbennett/JimBennett-SDK/main/img/system-liq-meme.png)
 
 You can also use `System.Linq.Async` on the async enumerables:
 
@@ -114,6 +114,8 @@ cd Mellon.IntegrationTest
 ```
 
 ## Contributing to this project
+
+![A meme of Frodo saying I will contribute to this repo](https://raw.githubusercontent.com/jimbobbennett/JimBennett-SDK/main/img/contribute-meme.gif)
 
 Want to add the rest of the APIs? That would be awesome.
 
