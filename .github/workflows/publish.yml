@@ -34,7 +34,7 @@ jobs:
       run: |
         git config --local user.email "jim.bennett@microsoft.com"
         git config --local user.name "JimBobBennett"
-        git add ./**/*/csproj
+        git add ./**/*.csproj
         git commit -m "[skip actions] Update versions"
     - name: Push changes
       uses: ad-m/github-push-action@master
