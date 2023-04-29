@@ -148,10 +148,10 @@ internal class TheOneApiEnumerator<T> : IAsyncEnumerator<T>
     private async Task<TheOneApiResponse<T>> MakeRequest(Uri api)
     {
         // Create the request
-        var request = new HttpRequestMessage(HttpMethod.Get, api); 
+        var request = new HttpRequestMessage(HttpMethod.Get, api);
 
         // Send the request
-        var response = await Client.SendAsync(request, _cancellationToken);
+        var response = await Client.SendAsync(request, _cancellationToken).ConfigureAwait(false);
 
         // Check the request worked
         if (!response.IsSuccessStatusCode)
@@ -167,7 +167,7 @@ internal class TheOneApiEnumerator<T> : IAsyncEnumerator<T>
         }
 
         // Get the JSON of the response
-        var json = await response.Content.ReadAsStringAsync(_cancellationToken);
+        var json = await response.Content.ReadAsStringAsync(_cancellationToken).ConfigureAwait(false);
 
         // Deserialize the JSON into a TheOneApiResponse
         var apiResponse = JsonSerializer.Deserialize<TheOneApiResponse<T>>(json);
@@ -195,7 +195,7 @@ internal class TheOneApiEnumerator<T> : IAsyncEnumerator<T>
 
         // Deserialize the JSON into a TheOneApiResponse
         // We know this won't be null as the call to LoadPage will throw an exception if it is
-        var apiResponse = await LoadPage(1);
+        var apiResponse = await LoadPage(1).ConfigureAwait(false);
 
         // Set up the page counts
         _totalPages = apiResponse.Pages;
@@ -233,7 +233,7 @@ internal class TheOneApiEnumerator<T> : IAsyncEnumerator<T>
         }
 
         // Load the next page
-        var apiResponse = await LoadPage(_pagesLoaded + 1);
+        var apiResponse = await LoadPage(_pagesLoaded + 1).ConfigureAwait(false);
 
         // Increment the page count
         _pagesLoaded++;
@@ -252,10 +252,10 @@ internal class TheOneApiEnumerator<T> : IAsyncEnumerator<T>
     public async ValueTask<bool> MoveNextAsync()
     {
         // If we haven't started yet, then load the first page of data
-        await InitIfRequired();
+        await InitIfRequired().ConfigureAwait(false);
         
         // If we have reached the end of the current page, then load the next page
-        await LoadNextPageIfRequired();
+        await LoadNextPageIfRequired().ConfigureAwait(false);
 
         // If we have another item in the list, then move to it
         if (_index < _items.Count - 1)
@@ -280,7 +280,7 @@ internal class TheOneApiEnumerator<T> : IAsyncEnumerator<T>
         _cancellationToken = cancellationToken;
 
         // If we haven't started yet, then load the first page of data
-        await InitIfRequired();
+        await InitIfRequired().ConfigureAwait(false);
 
         // Return the total number of items
         return _totalItems;
@@ -319,7 +319,7 @@ internal class TheOneApiEnumerator<T> : IAsyncEnumerator<T>
         try
         {
             // Make the request
-            var response = await MakeRequest(new Uri(_apiUri, id));
+            var response = await MakeRequest(new Uri(_apiUri, id)).ConfigureAwait(false);
 
             // Cache the item in our map, but not in the list as that's used for enumeration
             // and ideally the SDK should return everything in the same order as the REST API
