@@ -3,7 +3,7 @@ name: dotnet package
 on: [push]
 
 jobs:
-  build:
+  build-and-test:
 
     runs-on: ubuntu-latest
 
@@ -17,7 +17,7 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build
+    - name: Set user secrets
+      run: dotnet user-secrets set "TheOneApi:apiKey" "${{ secrets.ONE_API_KEY }}"
     - name: Test with the dotnet CLI
-      env:
-        TheOneApi:apiKey: ${{ secrets.ONE_API_KEY }}
       run: dotnet test
