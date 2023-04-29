@@ -6,10 +6,10 @@
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
     <UserSecretsId>97553a26-8def-4e27-9019-7896cfc50a9d</UserSecretsId>
-    <AssemblyVersion>0.1.0.0</AssemblyVersion>
-    <FileVersion>0.1.0.0</FileVersion>
-    <InformationalVersion>0.1.0+21.Branch.main.Sha.0039abcc568455a77cb157c0e1d99a351c14efe1</InformationalVersion>
-    <Version>0.1.0</Version>
+    <AssemblyVersion>0.1.22.0</AssemblyVersion>
+    <FileVersion>0.1.22.0</FileVersion>
+    <InformationalVersion>0.1.22+Branch.main.Sha.87eaf2c5c2e4e1be5e7701d496d1b400441f9849</InformationalVersion>
+    <Version>0.1.22</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
