@@ -294,4 +294,22 @@ public class QuotesTest
         quoteById.Should().NotBeNull();
         quoteById.Dialog.Should().Be("Deagol!");
     }
+
+    [TestMethod]
+    public async Task GivenQuotes_WhenUsingSystemLinqAsync_ThenLinqMethodsWork()
+    {
+        var quotes = new Quotes("apiKey", 2);
+
+        HttpMessageHandlerMocker.CreateMockClient(quotes.GetAsyncEnumerator(), new[]
+            {
+                new ExpectedRequest("https://the-one-api.dev/v2/quote/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4QuotesAndTwoPages),
+                new ExpectedRequest("https://the-one-api.dev/v2/quote/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4QuotesAndTwoPages)
+            });
+        
+        var first = await quotes.FirstAsync();
+        first.Dialog.Should().Be("Deagol!");
+
+        var last = await quotes.LastAsync();
+        last.Dialog.Should().Be("Because', it's my birthday and I wants it.");
+    }
 }

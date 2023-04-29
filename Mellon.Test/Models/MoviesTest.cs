@@ -324,8 +324,7 @@ public class MoviesTest
         HttpMessageHandlerMocker.CreateMockClient(movies.GetAsyncEnumerator(), new[]
             {
                 new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4MoviesAndTwoPages),
-                new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4MoviesAndTwoPages),
-                new ExpectedRequest("https://the-one-api.dev/v2/movie/foo", HttpStatusCode.InternalServerError, _jsonForFail)
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4MoviesAndTwoPages)
             });
         
         var first = await movies.FirstAsync();
