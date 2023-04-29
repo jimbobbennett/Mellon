@@ -15,11 +15,11 @@
   </PropertyGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="Mellon.Test" />
-    <None Include="..\readme.md" Pack="true" PackagePath="\" />
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
   <PropertyGroup>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/jimbobbennett/JimBennett-SDK</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jimbobbennett/JimBennett-SDK</RepositoryUrl>
     <RepositoryType>git</RepositoryType>

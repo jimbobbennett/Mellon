@@ -46,7 +46,7 @@ public class TheOneAPIClient
     /// Creates a new TheOneAPIClient object.
     /// </summary>
     /// <param name="credentials">The credentials for accessing The One API.</param>
-    public TheOneAPIClient(TheOneAPICredentials credentials, int pageSize = 100)
+    public TheOneAPIClient(TheOneAPICredentials credentials, int pageSize = 1000)
     {
         _credentials = credentials;
         _pageSize = pageSize;

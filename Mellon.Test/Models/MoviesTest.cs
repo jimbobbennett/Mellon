@@ -315,4 +315,23 @@ public class MoviesTest
         movieById.Should().NotBeNull();
         movieById.Name.Should().Be("The Desolation of Smaug");
     }
+
+    [TestMethod]
+    public async Task GivenMovies_WhenUsingSystemLinqAsync_ThenLinqMethodsWork()
+    {
+        var movies = new Movies("apiKey", 2);
+
+        HttpMessageHandlerMocker.CreateMockClient(movies.GetAsyncEnumerator(), new[]
+            {
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4MoviesAndTwoPages),
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4MoviesAndTwoPages),
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/foo", HttpStatusCode.InternalServerError, _jsonForFail)
+            });
+        
+        var first = await movies.FirstAsync();
+        first.Name.Should().Be("The Lord of the Rings Series");
+
+        var last = await movies.LastAsync();
+        last.Name.Should().Be("The Desolation of Smaug");
+    }
 }

@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "ms-dotnettools.csharp",
+        "rangav.vscode-thunder-client",
+        "docsmsft.docs-authoring-pack",
+        "streetsidesoftware.code-spell-checker",
+        "formulahendry.dotnet-test-explorer",
+        "github.copilot",
+        "redhat.vscode-xml",
+        "dbaeumer.vscode-eslint"
+    ]
+}
