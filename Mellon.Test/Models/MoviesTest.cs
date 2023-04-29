@@ -292,4 +292,27 @@ public class MoviesTest
         movieById.Should().NotBeNull();
         movieById.Name.Should().Be("The Desolation of Smaug");
     }
+
+    [TestMethod]
+    public async Task GivenAMovie_WhenGettingAMovieMoreThanOnce_ThenTheCacheIsUsed()
+    {
+        var movies = new Movies("apiKey", 2);
+
+        HttpMessageHandlerMocker.CreateMockClient(movies.GetAsyncEnumerator(), new[]
+            {
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/5cd95395de30eff6ebccde59", HttpStatusCode.OK, _jsonForSingleMovie),
+            });
+
+        var movieById = await movies.GetAsync("5cd95395de30eff6ebccde59");
+
+        movieById.Should().NotBeNull();
+        movieById.Name.Should().Be("The Desolation of Smaug");
+
+        HttpMessageHandlerMocker.CreateMockClientForAllRequests(movies.GetAsyncEnumerator(), HttpStatusCode.InternalServerError, _jsonForFail);
+
+        movieById = await movies.GetAsync("5cd95395de30eff6ebccde59");
+
+        movieById.Should().NotBeNull();
+        movieById.Name.Should().Be("The Desolation of Smaug");
+    }
 }

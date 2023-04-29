@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mellon", "Mellon\Mellon.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mellon.Test", "Mellon.Test\Mellon.Test.csproj", "{819C33AE-2374-4D3A-927B-8442C413F54C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mellon.TestHarness", "Mellon.TestHarness\Mellon.TestHarness.csproj", "{273BA35E-D223-481D-A04A-9C4E352851A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mellon.IntegrationTest", "Mellon.IntegrationTest\Mellon.IntegrationTest.csproj", "{273BA35E-D223-481D-A04A-9C4E352851A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

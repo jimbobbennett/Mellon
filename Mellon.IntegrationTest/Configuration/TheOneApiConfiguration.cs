@@ -1,4 +1,4 @@
-namespace Mellon.TestHarness.Configuration;
+namespace Mellon.IntegrationTest.Configuration;
 
 public class TheOneApiConfiguration
 {

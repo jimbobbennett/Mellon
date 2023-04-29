@@ -8,7 +8,7 @@ namespace Mellon.Test.Models;
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 
 [TestClass]
-public class QuotesTest
+public class QuotesForMovieTest
 {
     private const string _jsonFor2QuotesAndOnePage = @"{
             ""docs"": [
@@ -103,9 +103,9 @@ public class QuotesTest
         }";
 
     [TestMethod]
-    public void GivenAnApiKey_WhenTheQuotesObjectIsCreated_TheApiKeyIsSetOnTheHttpClient()
+    public void GivenAnApiKey_WhenTheQuotesForMovieObjectIsCreated_TheApiKeyIsSetOnTheHttpClient()
     {
-        var quotes = new Quotes("apiKey", 10);
+        var quotes = new QuotesForMovie("apiKey", "5cd95395de30eff6ebccde5d", 10);
 
         var enumerator = (TheOneApiEnumerator<Quote>)quotes.GetAsyncEnumerator();
         enumerator.Client.DefaultRequestHeaders.Authorization!.Scheme.Should().Be("Bearer");
@@ -115,11 +115,11 @@ public class QuotesTest
     [TestMethod]
     public async Task GivenAJsonResponseWith2QuotesAndOnePage_WhenCountingQuotes_ThenTheCountIs2()
     {
-        var quotes = new Quotes("apiKey", 2);
+        var quotes = new QuotesForMovie("apiKey", "5cd95395de30eff6ebccde5d", 2);
 
         HttpMessageHandlerMocker.CreateMockClient(quotes.GetAsyncEnumerator(), new[] 
             { 
-                new ExpectedRequest("https://the-one-api.dev/v2/quote/?page=1&limit=2", HttpStatusCode.OK, _jsonFor2QuotesAndOnePage) 
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/5cd95395de30eff6ebccde5d/quote/?page=1&limit=2", HttpStatusCode.OK, _jsonFor2QuotesAndOnePage) 
             });
 
         var count = await quotes.CountAsync();
@@ -130,12 +130,12 @@ public class QuotesTest
     [TestMethod]
     public async Task GivenAJsonResponseWith4QuotesAndTwoPages_WhenCountingQuotes_ThenTheCountIs4()
     {
-        var quotes = new Quotes("apiKey", 2);
+        var quotes = new QuotesForMovie("apiKey", "5cd95395de30eff6ebccde5d", 2);
 
         HttpMessageHandlerMocker.CreateMockClient(quotes.GetAsyncEnumerator(), new[]
             {
-                new ExpectedRequest("https://the-one-api.dev/v2/quote/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4QuotesAndTwoPages),
-                new ExpectedRequest("https://the-one-api.dev/v2/quote/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4QuotesAndTwoPages)
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/5cd95395de30eff6ebccde5d/quote/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4QuotesAndTwoPages),
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/5cd95395de30eff6ebccde5d/quote/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4QuotesAndTwoPages)
             });
 
         var count = await quotes.CountAsync();
@@ -146,12 +146,12 @@ public class QuotesTest
     [TestMethod]
     public async Task GivenAJsonResponseWith4QuotesAndTwoPages_WhenEnumeratingQuotes_ThenAllQuotesAreFound()
     {
-        var quotes = new Quotes("apiKey", 2);
+        var quotes = new QuotesForMovie("apiKey", "5cd95395de30eff6ebccde5d", 2);
 
         HttpMessageHandlerMocker.CreateMockClient(quotes.GetAsyncEnumerator(), new[]
             {
-                new ExpectedRequest("https://the-one-api.dev/v2/quote/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4QuotesAndTwoPages),
-                new ExpectedRequest("https://the-one-api.dev/v2/quote/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4QuotesAndTwoPages)
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/5cd95395de30eff6ebccde5d/quote/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4QuotesAndTwoPages),
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/5cd95395de30eff6ebccde5d/quote/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4QuotesAndTwoPages)
             });
 
         var allQuotes = new List<Quote>();
@@ -171,12 +171,12 @@ public class QuotesTest
     [TestMethod]
     public async Task GivenAJsonResponseWith4QuotesAndTwoPages_WhenEnumeratingQuotesTwice_ThenAllQuotesAreFoundBothTimes()
     {
-        var quotes = new Quotes("apiKey", 2);
+        var quotes = new QuotesForMovie("apiKey", "5cd95395de30eff6ebccde5d", 2);
 
         HttpMessageHandlerMocker.CreateMockClient(quotes.GetAsyncEnumerator(), new[]
             {
-                new ExpectedRequest("https://the-one-api.dev/v2/quote/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4QuotesAndTwoPages),
-                new ExpectedRequest("https://the-one-api.dev/v2/quote/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4QuotesAndTwoPages)
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/5cd95395de30eff6ebccde5d/quote/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4QuotesAndTwoPages),
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/5cd95395de30eff6ebccde5d/quote/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4QuotesAndTwoPages)
             });
 
         var allQuotes = new List<Quote>();
@@ -209,12 +209,12 @@ public class QuotesTest
     [TestMethod]
     public async Task GivenAJsonResponseWith4QuotesAndTwoPages_WhenGettingAQuoteWithAnExistingIdAfterEnumerating_ThenTheQuoteIsReturnedFromTheCache()
     {
-        var quotes = new Quotes("apiKey", 2);
+        var quotes = new QuotesForMovie("apiKey", "5cd95395de30eff6ebccde5d", 2);
 
         HttpMessageHandlerMocker.CreateMockClient(quotes.GetAsyncEnumerator(), new[]
             {
-                new ExpectedRequest("https://the-one-api.dev/v2/quote/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4QuotesAndTwoPages),
-                new ExpectedRequest("https://the-one-api.dev/v2/quote/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4QuotesAndTwoPages)
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/5cd95395de30eff6ebccde5d/quote/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4QuotesAndTwoPages),
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/5cd95395de30eff6ebccde5d/quote/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4QuotesAndTwoPages)
             });
 
         await foreach (var quote in quotes) {}
@@ -228,13 +228,13 @@ public class QuotesTest
     [TestMethod]
     public async Task GivenAJsonResponseWithQuotes_WhenGettingAQuoteWithAMissingIdAfterEnumerating_ThenNullIsReturned()
     {
-        var quotes = new Quotes("apiKey", 2);
+        var quotes = new QuotesForMovie("apiKey", "5cd95395de30eff6ebccde5d", 2);
 
         HttpMessageHandlerMocker.CreateMockClient(quotes.GetAsyncEnumerator(), new[]
             {
-                new ExpectedRequest("https://the-one-api.dev/v2/quote/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4QuotesAndTwoPages),
-                new ExpectedRequest("https://the-one-api.dev/v2/quote/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4QuotesAndTwoPages),
-                new ExpectedRequest("https://the-one-api.dev/v2/quote/foo", HttpStatusCode.InternalServerError, _jsonForFail)
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/5cd95395de30eff6ebccde5d/quote/?page=1&limit=2", HttpStatusCode.OK, _jsonForFirstPageOf4QuotesAndTwoPages),
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/5cd95395de30eff6ebccde5d/quote/?page=2&limit=2", HttpStatusCode.OK, _jsonForSecondPageOf4QuotesAndTwoPages),
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/5cd95395de30eff6ebccde5d/quote/foo", HttpStatusCode.InternalServerError, _jsonForFail)
             });
 
         await foreach (var quote in quotes) {}
@@ -247,7 +247,7 @@ public class QuotesTest
     [TestMethod]
     public async Task GivenAJsonResponseWithQuotes_WhenGettingAQuoteWithAMissingIdBeforeEnumerating_ThenNullIsReturned()
     {
-        var quotes = new Quotes("apiKey", 2);
+        var quotes = new QuotesForMovie("apiKey", "5cd95395de30eff6ebccde5d", 2);
 
         HttpMessageHandlerMocker.CreateMockClientForAllRequests(quotes.GetAsyncEnumerator(), HttpStatusCode.InternalServerError, _jsonForFail);
 
@@ -259,11 +259,11 @@ public class QuotesTest
     [TestMethod]
     public async Task GivenAJsonResponseWith4QuotesAndTwoPages_WhenGettingAQuoteWithAnExistingIdWithoutEnumerating_ThenTheSingleQuoteIsRequestedAndReturned()
     {
-        var quotes = new Quotes("apiKey", 2);
+        var quotes = new QuotesForMovie("apiKey", "5cd95395de30eff6ebccde5d", 2);
 
         HttpMessageHandlerMocker.CreateMockClient(quotes.GetAsyncEnumerator(), new[]
             {
-                new ExpectedRequest("https://the-one-api.dev/v2/quote/5cd96e05de30eff6ebcce7eb", HttpStatusCode.OK, _jsonForSingleQuote),
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/5cd95395de30eff6ebccde5d/quote/5cd96e05de30eff6ebcce7eb", HttpStatusCode.OK, _jsonForSingleQuote),
             });
 
         var quoteById = await quotes.GetAsync("5cd96e05de30eff6ebcce7eb");
@@ -273,13 +273,13 @@ public class QuotesTest
     }
 
     [TestMethod]
-    public async Task GivenAQuote_WhenGettingQuotesMoreThanOnce_ThenTheCacheIsUsed()
+    public async Task GivenAMovie_WhenGettingQuotesMoreThanOnce_ThenTheCacheIsUsed()
     {
-        var quotes = new Quotes("apiKey", 2);
+        var quotes = new QuotesForMovie("apiKey", "5cd95395de30eff6ebccde5d", 2);
 
         HttpMessageHandlerMocker.CreateMockClient(quotes.GetAsyncEnumerator(), new[]
             {
-                new ExpectedRequest("https://the-one-api.dev/v2/quote/5cd96e05de30eff6ebcce7eb", HttpStatusCode.OK, _jsonForSingleQuote),
+                new ExpectedRequest("https://the-one-api.dev/v2/movie/5cd95395de30eff6ebccde5d/quote/5cd96e05de30eff6ebcce7eb", HttpStatusCode.OK, _jsonForSingleQuote),
             });
 
         var quoteById = await quotes.GetAsync("5cd96e05de30eff6ebcce7eb");
