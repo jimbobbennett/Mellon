@@ -2,8 +2,16 @@ name: dotnet publish
 
 on:
   push:
-      branches:
-        - main
+    branches:
+      - main
+    paths:
+      - Mellon/**
+      - Mellon.Test/**
+      - Mellon.IntegrationTest/**
+      - mellon.sln
+      - .github/workflows/*.yml
+
+permissions: write-all
 
 jobs:
   build-and-test:
