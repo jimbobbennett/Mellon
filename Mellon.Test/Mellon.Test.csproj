@@ -5,10 +5,10 @@
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
-    <AssemblyVersion>0.1.31.0</AssemblyVersion>
-    <FileVersion>0.1.31.0</FileVersion>
-    <InformationalVersion>0.1.31+Branch.main.Sha.6abac99758f96780865cb8d57d7b66ff35966028</InformationalVersion>
-    <Version>0.1.31</Version>
+    <AssemblyVersion>0.1.33.0</AssemblyVersion>
+    <FileVersion>0.1.33.0</FileVersion>
+    <InformationalVersion>0.1.33+Branch.main.Sha.aafade68955e1bfe2df6ee944910adceea4132b0</InformationalVersion>
+    <Version>0.1.33</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="6.11.0" />
