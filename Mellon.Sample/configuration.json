@@ -1,0 +1,5 @@
+{
+    "TheOneApi": {
+      "apiKey": "", // dotnet user-secrets set "TheOneApi:apiKey" "****"
+    }
+}

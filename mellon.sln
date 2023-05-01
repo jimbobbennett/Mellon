@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mellon.Test", "Mellon.Test\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mellon.IntegrationTest", "Mellon.IntegrationTest\Mellon.IntegrationTest.csproj", "{273BA35E-D223-481D-A04A-9C4E352851A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mellon.Sample", "Mellon.Sample\Mellon.Sample.csproj", "{4CE11EA0-C6AA-497C-8738-DE0EED874E88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{273BA35E-D223-481D-A04A-9C4E352851A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{273BA35E-D223-481D-A04A-9C4E352851A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{273BA35E-D223-481D-A04A-9C4E352851A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CE11EA0-C6AA-497C-8738-DE0EED874E88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CE11EA0-C6AA-497C-8738-DE0EED874E88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CE11EA0-C6AA-497C-8738-DE0EED874E88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CE11EA0-C6AA-497C-8738-DE0EED874E88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

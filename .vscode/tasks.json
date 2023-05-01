@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Mellon.TestHarness/Mellon.TestHarness.csproj",
+                "${workspaceFolder}/Mellon.Sample/Mellon.Sample.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/Mellon.TestHarness/Mellon.TestHarness.csproj",
+                "${workspaceFolder}/Mellon.Sample/Mellon.Sample.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/Mellon.TestHarness/Mellon.TestHarness.csproj"
+                "${workspaceFolder}/Mellon.Sample/Mellon.Sample.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

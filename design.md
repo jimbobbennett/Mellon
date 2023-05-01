@@ -6,6 +6,7 @@ This SDK was designed with the following in mind:
 - Easy to add new endpoint
 - Standard .NET patterns
 - Enumerables of objects rather than an object graph
+- Filtering and sorting client side
 
 ## Caching
 
@@ -95,3 +96,7 @@ The graph-like navigation is implemented by helper methods - either getting a mo
 var quote = await client.Quotes.FirstAsync();
 var movie = await client.Movies.GetAsync(quote.MovieId);
 ```
+
+## Filtering and sorting client side
+
+As this API only returns a small amount of data, and this data is cached between calls, filtering is not implemented using the filtering and sorting capabilities of the API, instead it can be done client side using standard Linq.

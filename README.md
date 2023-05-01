@@ -94,11 +94,13 @@ This repo contains a `devcontainer` configuration, so can be run in either [GitH
 
 The dev container is configured with .NET 7.0 as well as all the recommended extensions. If you want to build locally, you will need .NET 7.0 installed. Instructions to do this are in the [DotNet documentation](https://dotnet.microsoft.com/).
 
-This repo has 3 projects:
+This repo has 4 projects:
 
 - `Mellon` - The SDK
 - `Mellon.Test` - Unit tests for the SDK
 - `Mellon.IntegrationTest` - Integration tests for the SDK that hit The One API endpoint
+- `Mellon.Sample` - A sample app where you can select a movie and it shows a random movie quote
+
 You can build and run the tests as normal:
 
 ```bash
