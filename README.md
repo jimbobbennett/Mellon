@@ -112,7 +112,7 @@ The integration tests need an API key to work as they query the API. This needs 
 
 ```bash
 cd Mellon.IntegrationTest
- dotnet user-secrets set "TheOneApi:apiKey" "<api key>"
+dotnet user-secrets set "TheOneApi:apiKey" "<api key>"
 ```
 
 ## Contributing to this project
